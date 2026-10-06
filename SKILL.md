@@ -52,23 +52,23 @@ Everything below between the `BEGIN CLIENT CONTEXT` and `END CLIENT CONTEXT` mar
 
 Anchor every call to the profile. Do not default to generic menswear advice. The profile defines his **colouring** (season, contrast level), his two **registers** (a neutral family and an earth family, each self-harmonizing), his **hero colours**, what to **avoid near the face**, **metals**, **body and silhouette** rules, **aesthetic**, **formality life**, **climate bands**, **personal hard constraints**, **personal flags** and **method notes** from his own history.
 
-!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "${CLAUDE_PROJECT_DIR}" profile 1`
+!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "" profile 1`
 
-!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "${CLAUDE_PROJECT_DIR}" profile 2`
+!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "" profile 2`
 
-!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "${CLAUDE_PROJECT_DIR}" closet 1`
+!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "" closet 1`
 
-!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "${CLAUDE_PROJECT_DIR}" closet 2`
+!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "" closet 2`
 
-!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "${CLAUDE_PROJECT_DIR}" closet 3`
+!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "" closet 3`
 
-!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "${CLAUDE_PROJECT_DIR}" closet 4`
+!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "" closet 4`
 
-!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "${CLAUDE_PROJECT_DIR}" history 1`
+!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "" history 1`
 
-!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "${CLAUDE_PROJECT_DIR}" history 2`
+!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "" history 2`
 
-!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "${CLAUDE_PROJECT_DIR}" history 3`
+!`bash "${CLAUDE_SKILL_DIR}/scripts/load-context.sh" "" history 3`
 
 **Staleness check:** if an item an open issue refers to is no longer in the closet, say so in one line before answering rather than proceeding silently. If the profile's colouring says confidence is low, treat palette calls near the face as provisional and say so once.
 

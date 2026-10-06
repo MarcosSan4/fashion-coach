@@ -5,7 +5,7 @@ Goal: find what the day-to-day modes never see: thin formality and register cell
 ## 1. Run the counts
 
 ```
-python3 ${CLAUDE_SKILL_DIR}/scripts/audit.py --project "${CLAUDE_PROJECT_DIR}"
+python3 ${CLAUDE_SKILL_DIR}/scripts/audit.py
 ```
 
 It finds his files the same way the context loader does and prints six lenses: coverage grid, orphans, over-reliance, unworn, gap-log tally, stale gaps. `--season <s>` overrides the season (it assumes the northern hemisphere: pass it for a southern client); `--json` gives the raw numbers. Read-only.

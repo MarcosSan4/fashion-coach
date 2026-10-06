@@ -2,6 +2,71 @@
 
 A personal stylist for men, as a Claude Code skill. It dresses you from the clothes you actually own, learns your taste from the grades you give its outfits, and explains the why behind every call so you get better at it yourself. Your style profile (colour season, frame, aesthetic, hard no's), your full closet and your graded outfit history are injected into the prompt on every run, so answers are about your wardrobe, not generic menswear advice.
 
+## How it works
+
+This repo is a **skill** for [Claude Code](https://docs.claude.com/en/docs/claude-code/overview), Anthropic's coding agent. You don't open this repo and work inside it: you install it once, then type `/fashion-coach ...` in any Claude Code session (terminal, VS Code, JetBrains or the desktop app).
+
+```
+this repo   ->  ~/.claude/skills/fashion-coach/   the coach itself (install once, never touch again)
+your data   ->  ~/fashion-coach/                  your profile, closet and outfit history (created for you)
+```
+
+The coach reads your files fresh on every run and writes back to them (new clothes, graded outfits, shopping gaps), so it gets more personal the more you use it.
+
+## Quick start
+
+**You need:** [Claude Code](https://docs.claude.com/en/docs/claude-code/overview) installed and logged in, plus `git`, `bash` and `python3` (preinstalled on macOS and most Linux).
+
+**1. Install the skill** (one command, in a terminal):
+
+```bash
+git clone https://github.com/MarcosSan4/fashion-coach.git ~/.claude/skills/fashion-coach
+```
+
+That's it: Claude Code picks up every skill in `~/.claude/skills/` automatically. To update later, run `git -C ~/.claude/skills/fashion-coach pull`. (To install it for one project only, clone into `<project>/.claude/skills/fashion-coach` instead.)
+
+**2. Set yourself up** (about 10 minutes, then as many clothes as you like):
+
+```bash
+cd ~ && claude
+```
+
+Then type:
+
+```
+/fashion-coach set me up
+```
+
+The coach sees you have no profile yet and walks you through it, one short block at a time:
+
+1. **Two daylight selfies and one full-body photo.** Drag the image files into the Claude Code window, or paste their paths.
+2. **A few numbered questions** about your colouring, build, style and week. Answer in a line each; dictation is fine.
+3. **Your clothes.** Photograph garments (one per photo, laid flat or on a hanger) or just type a list ("navy Uniqlo crew neck, fits close; light baggy jeans; white leather sneakers"). Start with about 15 items; add the rest whenever.
+4. **Rate 5 outfits** it builds from your closet, so it learns your taste from day one.
+
+Your files land in `~/fashion-coach/`. The first time, Claude Code asks permission to run the skill and its scripts: allow them.
+
+**3. Use it.** From any folder, any time:
+
+```
+/fashion-coach what should I wear to a dinner on Friday? ~15C, smart casual
+/fashion-coach should I buy this? <paste a link or describe it>
+/fashion-coach grade this: navy knit polo, grey trousers, white sneakers
+/fashion-coach add these           (with garment photos dragged in)
+/fashion-coach audit my closet
+```
+
+You can also just ask in plain words ("what should I wear tonight?"); Claude Code invokes the skill when the question is about your clothes.
+
+**Want to look around first?** Try the demo client, Alex (fictional: a 26-item closet and 6 graded outfits). The coach writes to the files it uses, so work on a copy:
+
+```bash
+cp -R ~/.claude/skills/fashion-coach/examples/demo ~/alex-demo
+cd ~/alex-demo && claude
+```
+
+Then type `/fashion-coach what should I wear to a dinner on Friday`. Inside that folder the coach dresses Alex instead of you; more prompts in [`examples/demo/README.md`](examples/demo/README.md).
+
 ## What it does
 
 | Mode | What happens | Try |
@@ -25,29 +90,9 @@ A personal stylist for men, as a Claude Code skill. It dresses you from the clot
 
 Your profile, closet and history live in plain local files on your disk. The Outfit Board server binds to `127.0.0.1` only and accepts writes only from its own page. Photos and closet data are still sent to the model like any other prompt content.
 
-## Quick start
-
-**1. Install.** Clone or copy this repo to one of:
-
-```bash
-git clone https://github.com/MarcosSan4/fashion-coach.git ~/.claude/skills/fashion-coach              # all your projects
-git clone https://github.com/MarcosSan4/fashion-coach.git <project>/.claude/skills/fashion-coach      # one project
-```
-
-**2. Try the demo** (Alex, a fictional Soft Autumn client with a 26-item closet, 6 graded outfits and a parked issue). The coach writes to its files, so work on a copy:
-
-```bash
-cp -R ~/.claude/skills/fashion-coach/examples/demo ~/alex-demo
-cd ~/alex-demo && claude
-```
-
-Then ask `/fashion-coach what should I wear to a dinner on Friday`. More prompts in [`examples/demo/README.md`](examples/demo/README.md).
-
-**3. Set yourself up.** From a folder with no `wardrobe/` folder (and no `~/fashion-coach/` or `~/.fashion-coach` yet), run `/fashion-coach set me up`. The coach notices there is no profile and starts onboarding, writing your files to `~/fashion-coach/` unless you name another folder.
-
 ## Where your data lives
 
-`scripts/load-context.sh` finds your files in this order, first match wins (`<project>` is `$CLAUDE_PROJECT_DIR`):
+By default everything lives in `~/fashion-coach/` and you never need this section. To keep your files elsewhere, the coach (`scripts/load-context.sh`) looks in this order, first match wins (`<project>` is the folder you started Claude Code in):
 
 1. `<project>/.fashion-coach`: a config file with the keys below
 2. `<project>/wardrobe/`: the plain folder layout (`profile.md`, `closet.csv`, `outfit-history.csv` + `lessons.md`, `shopping.md`, `gap-log.csv`, `issues/`; an older single-file `outfit-history.md` also works, but the board can only log worn outfits into the CSV)

@@ -48,7 +48,7 @@ else
   if [ -f "$PROJECT/wardrobe/profile.md" ]; then DIR="$PROJECT/wardrobe"; else DIR="$HOME/fashion-coach"; fi
   SOURCE="folder $DIR"
   PROFILE="$DIR/profile.md"; CLOSET="$DIR/closet.csv"; HISTORY="$DIR/outfit-history.md"
-  [ -f "$DIR/outfit-history.csv" ] && { HISTORY="$DIR/outfit-history.csv"; LESSONS="$DIR/lessons.md"; }
+  { [ -f "$DIR/outfit-history.csv" ] || [ ! -f "$DIR/outfit-history.md" ]; } && { HISTORY="$DIR/outfit-history.csv"; LESSONS="$DIR/lessons.md"; }
   SHOPPING="$DIR/shopping.md"; ISSUES_DIR="$DIR/issues"
 fi
 

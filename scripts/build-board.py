@@ -140,8 +140,8 @@ def resolve():
         base = PROJECT / "wardrobe" if (PROJECT / "wardrobe/profile.md").is_file() else Path.home() / "fashion-coach"
         closet, board, profile = base / "closet.csv", base / "boards", base / "profile.md"
         # same files load-context.sh reads in this layout: a CSV history (with lessons.md and remixes.csv
-        # beside it) when there is one, else the markdown history
-        if (base / "outfit-history.csv").is_file():
+        # beside it) when there is one or no history exists yet (new setups), else the older markdown history
+        if (base / "outfit-history.csv").is_file() or not (base / "outfit-history.md").is_file():
             PATHS["history"], PATHS["remixes"] = base / "outfit-history.csv", base / "remixes.csv"
             PATHS["lessons"] = base / "lessons.md" if (base / "lessons.md").is_file() else None
         else:
